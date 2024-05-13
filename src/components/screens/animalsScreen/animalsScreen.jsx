@@ -37,9 +37,6 @@ const AnimalsScreen = () => {
 
         setAnimalsFiltered(animals?.docs.map(i => i))
 
-        const set = new Set(animals?.docs.map(i => i?.data().location))
-        setPreLocation(Array.from(set))
-
         const set2 = new Set(animals?.docs.map(i => i?.data().mass))
         setPreMass(Array.from(set2))
 
@@ -61,6 +58,10 @@ const AnimalsScreen = () => {
 
     }
 
+    const filterLocation = (select, value) => {
+        setAnimalsFiltered(animals?.docs.filter(i => i?.data()[select].toLowerCase().includes(value.toLowerCase())))
+    }
+
     return (
         <div>
 
@@ -80,16 +81,9 @@ const AnimalsScreen = () => {
 
                         <div className="mt-[20px] flex justify-center md:justify-start flex-wrap items-center w-full gap-[10px]">
 
-                            <div className="dropdown">
-                                <div tabIndex={0} role="button" className="btn m-1 font-medium text-[17px]">Место проживания <span className="rotate-90 text-xs mt-1 ml-1">{">"}</span></div>
-                                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 bg-base-100 rounded-box w-52">
-                                    {
-                                        preLocation.map(i => (
-                                            <li onClick={() => filterAnimals("location", i)} className="py-2 px-4 cursor-pointer hover:bg-base-200 rounded-lg">{i}</li>
-                                        ))
-                                    }
-                                </ul>
-                            </div>
+                            <input onChange={e => filterLocation("location", e.target.value)} className="input input-bordered" placeholder="Континент" />
+
+                            <input onChange={e => filterLocation("biom", e.target.value)} className="input input-bordered" placeholder="Биом" />
 
                             <div className="dropdown">
                                 <div tabIndex={0} role="button" className="btn m-1 font-medium text-[17px]">Вес <span className="rotate-90 text-xs mt-1 ml-1">{">"}</span></div>
