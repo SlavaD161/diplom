@@ -37,7 +37,7 @@ const Adminpanel = () => {
     const [animalInp, setAnimalsInp] = useState({})
 
     const addAnimal = async () => {
-        if (animalInp.name && animalInp.desc && animalInp.imgUrl && animalInp.location && animalInp.mass && animalInp.size && animalInp.speed) {
+        if (animalInp.name && animalInp.desc && animalInp.imgUrl && animalInp.location && animalInp.mass && animalInp.size && animalInp.speed && animalInp.biom) {
 
             const animalsRef = doc(db, 'animals', animalInp.name);
             setAnimalsInp({
@@ -49,6 +49,7 @@ const Adminpanel = () => {
                 size: "",
                 speed: "",
                 category: "",
+                biom: "",
             })
 
             await setDoc(animalsRef, {
@@ -164,6 +165,7 @@ const Adminpanel = () => {
                                         <th className="w-2/12">Категория</th>
                                         <th className="w-5/12">Картинка</th>
                                         <th className="w-3/12">Место проживания</th>
+                                        <th className="w-3/12">Биом</th>
                                         <th className="w-2/12">Масса</th>
                                         <th className="w-2/12">Размер</th>
                                         <th className="w-2/12">Скорость</th>
@@ -179,6 +181,7 @@ const Adminpanel = () => {
                                                 <td className="w-2/12">{item.data().category}</td>
                                                 <td className="w-5/12">{item.data().imgUrl.toString().slice(0, 36)}...</td>
                                                 <td className="w-3/12">{item.data().location}</td>
+                                                <td className="w-3/12">{item.data().biom}</td>
                                                 <td className="w-2/12">{item.data().mass}</td>
                                                 <td className="w-2/12">{item.data().size}</td>
                                                 <td className="w-2/12">{item.data().speed}</td>
