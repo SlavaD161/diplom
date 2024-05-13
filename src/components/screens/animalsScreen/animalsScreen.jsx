@@ -31,22 +31,33 @@ const AnimalsScreen = () => {
     
     useEffect(() => {
         window.scroll(0, 0)
+        setAnimalsFiltered(animals?.docs.map(i => i))
+
     }, [animals])
 
     useEffect(() => {
 
-        setAnimalsFiltered(animals?.docs.map(i => i))
+        if (animalsFiltered) {
+            const set2 = new Set(animalsFiltered?.map(i => i?.data().mass))
+            setPreMass(Array.from(set2))
 
-        const set2 = new Set(animals?.docs.map(i => i?.data().mass))
-        setPreMass(Array.from(set2))
+            const set3 = new Set(animalsFiltered?.map(i => i?.data().size))
+            setPreSize(Array.from(set3))
 
-        const set3 = new Set(animals?.docs.map(i => i?.data().size))
-        setPreSize(Array.from(set3))
+            const set4 = new Set(animalsFiltered?.map(i => i?.data().speed))
+            setPreSpeed(Array.from(set4))
+        } else {
+            const set2 = new Set(animals?.docs.map(i => i?.data().mass))
+            setPreMass(Array.from(set2))
+    
+            const set3 = new Set(animals?.docs.map(i => i?.data().size))
+            setPreSize(Array.from(set3))
+    
+            const set4 = new Set(animals?.docs.map(i => i?.data().speed))
+            setPreSpeed(Array.from(set4))
+        }
 
-        const set4 = new Set(animals?.docs.map(i => i?.data().speed))
-        setPreSpeed(Array.from(set4))
-
-    }, [animals])
+    }, [animals, animalsFiltered])
 
     const filterAnimals = (select, selected) => {
         const elem = document.activeElement;
