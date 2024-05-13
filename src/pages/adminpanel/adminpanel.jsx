@@ -62,6 +62,7 @@ const Adminpanel = () => {
                 ratings: "",
                 size: animalInp.size,
                 speed: animalInp.speed,
+                biom: animalInp.biom,
             }, { merge: true });
 
             document.getElementById('animalModal').close()
@@ -265,13 +266,9 @@ const Adminpanel = () => {
                             }
                         </select>
 
-                        <select defaultValue={"Евразия"} onChange={e => setAnimalsInp(prev => ({...prev, location: e.target.value}))} value={animalInp.location} className="select select-bordered">
-                            {
-                                ["Евразия", "Африка", "Северная Америка", "Южная Америка", "Австралия", "Антарктида"].map(i => (
-                                    <option value={i}>{i}</option>
-                                ))
-                            }
-                        </select>
+                        <input onChange={e => setAnimalsInp(prev => ({...prev, location: e.target.value}))} value={animalInp.location} type="text" placeholder={`Континенты (через - ",")`} className="input input-bordered" />
+
+                        <input onChange={e => setAnimalsInp(prev => ({...prev, biom: e.target.value}))} value={animalInp.biom} type="text" placeholder="Биом" className="input input-bordered" />
 
                         <button onClick={addAnimal} className="mt-[10px] btn bg-[#458FF6] hover:bg-[#3166AF] text-[#fff]">Добавить</button>
 
