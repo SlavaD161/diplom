@@ -48,7 +48,7 @@ const Navigation = () => {
                     !localStorage.getItem("isLogined")
                     &&
                     <Link to={"/auth"}>
-                        <NavItem>Регистрация</NavItem>
+                        <NavItem></NavItem>
                     </Link>
                 }
 
