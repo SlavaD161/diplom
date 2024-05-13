@@ -258,7 +258,7 @@ const Adminpanel = () => {
                         <input onChange={e => setAnimalsInp(prev => ({...prev, size: e.target.value}))} value={animalInp.size} type="text" placeholder="Размер" className="input input-bordered" />
                         <input onChange={e => setAnimalsInp(prev => ({...prev, speed: e.target.value}))} value={animalInp.speed} type="text" placeholder="Скорость" className="input input-bordered" />
 
-                        <select defaultValue={categories?.docs[0].data().name} onChange={e => setAnimalsInp(prev => ({...prev, category: e.target.value}))} value={animalInp.category} className="select select-bordered">
+                        <select defaultValue={categories?.docs[0]?.data().name} onChange={e => setAnimalsInp(prev => ({...prev, category: e.target.value}))} value={animalInp.category} className="select select-bordered">
                             {
                                 categories?.docs.map(i => (
                                     <option value={i.data().name}>{i.data().name}</option>
