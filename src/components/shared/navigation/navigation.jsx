@@ -41,7 +41,7 @@ const Navigation = () => {
                 </div>
 
                 <Link to={"/animals"}>
-                    <NavItem>Все животниые</NavItem>
+                    <NavItem>Все животные</NavItem>
                 </Link>
 
                 {
