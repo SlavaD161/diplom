@@ -19,7 +19,7 @@ const Slider = ({title, desc, link, imgUrl}) => {
 
             </div>
 
-            <img src={imgUrl} alt={title} className="absolute md:static h-96 opacity-35 md:opacity-100 right-2 top-20 w-6/12 rounded-[40px] mix-blend-luminosity" />
+            <img src={imgUrl} alt={title} className="absolute md:static object-cover h-96 opacity-35 md:opacity-100 right-2 top-20 w-6/12 rounded-[40px] mix-blend-luminosity" />
             
         </div>
     )
