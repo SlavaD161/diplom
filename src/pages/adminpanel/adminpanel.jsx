@@ -253,7 +253,6 @@ const Adminpanel = () => {
                         <input onChange={e => setAnimalsInp(prev => ({ ...prev, name: e.target.value }))} value={animalInp.name} type="text" placeholder="Имя" className="input input-bordered" />
                         <input onChange={e => setAnimalsInp(prev => ({...prev, desc: e.target.value}))} value={animalInp.desc} type="text" placeholder="Описание" className="input input-bordered" />
                         <input onChange={e => setAnimalsInp(prev => ({...prev, imgUrl: e.target.value}))} value={animalInp.imgUrl} type="text" placeholder="Картинка URL" className="input input-bordered" />
-                        <input onChange={e => setAnimalsInp(prev => ({...prev, location: e.target.value}))} value={animalInp.location} type="text" placeholder="Место проживания" className="input input-bordered" />
                         <input onChange={e => setAnimalsInp(prev => ({...prev, mass: e.target.value}))} value={animalInp.mass} type="text" placeholder="Масса" className="input input-bordered" />
                         <input onChange={e => setAnimalsInp(prev => ({...prev, size: e.target.value}))} value={animalInp.size} type="text" placeholder="Размер" className="input input-bordered" />
                         <input onChange={e => setAnimalsInp(prev => ({...prev, speed: e.target.value}))} value={animalInp.speed} type="text" placeholder="Скорость" className="input input-bordered" />
@@ -262,6 +261,14 @@ const Adminpanel = () => {
                             {
                                 categories?.docs.map(i => (
                                     <option value={i.data().name}>{i.data().name}</option>
+                                ))
+                            }
+                        </select>
+
+                        <select defaultValue={"Евразия"} onChange={e => setAnimalsInp(prev => ({...prev, location: e.target.value}))} value={animalInp.location} className="select select-bordered">
+                            {
+                                ["Евразия", "Африка", "Северная Америка", "Южная Америка", "Австралия", "Антарктида"].map(i => (
+                                    <option value={i}>{i}</option>
                                 ))
                             }
                         </select>
