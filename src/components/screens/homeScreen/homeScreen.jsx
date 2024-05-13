@@ -11,14 +11,12 @@ import Category from "../../ui/category/category"
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { getFirestore, collection } from "firebase/firestore"; 
 import { app } from "../../../firebase/firebase"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Loader from "../../shared/loader/loader"
 
 const HomeScreen = () => {
 
-    useEffect(() => {
-        window.scroll(0, 0)
-    }, [])
+    const [userLocation, setUserLocation] = useState("")
 
     const [categories, loading] = useCollection(
         collection(getFirestore(app), 'categories'),
@@ -33,6 +31,24 @@ const HomeScreen = () => {
             snapshotListenOptions: { includeMetadataChanges: true },    
         }
     );
+
+    const [users] = useCollection(
+        collection(getFirestore(app), 'users'),
+        {
+            snapshotListenOptions: { includeMetadataChanges: true },    
+        }
+    );
+
+    useEffect(() => {
+        window.scroll(0, 0)
+    }, [])
+
+    useEffect(() => {        
+        if (localStorage.getItem("isLogined")) {
+            setUserLocation(users?.docs.filter(i => i.data().email == localStorage.getItem("user"))[0].data().continent)
+        }
+
+    }, [animals])
 
     return (
         <div>
@@ -125,6 +141,32 @@ const HomeScreen = () => {
                             </div>
 
                         </div>
+
+                        {localStorage.getItem("isLogined") && <div className="mt-[80px]">
+
+                            <div>
+                                <Title title={"Животные на вашем континенте"} />
+                            </div>
+
+                            <div className="mt-[35px] flex flex-wrap justify-center md:justify-start gap-[20px] items-center gap-y-[40px]">
+
+                                {
+                                    animals?.docs.reverse().filter(item => item.data().location == userLocation).slice(0, 8).map(i => (
+                                        <Card
+                                            key={i.id}
+                                            imgUrl={i.data().imgUrl}
+                                            title={i.data().name}
+                                            category={i.data().category}
+                                            ratings={i.data().ratings.split(", ").filter(i => i != "")}
+                                            desc={i.data().desc}
+                                        />
+                                    ))
+                                }
+
+                            </div>
+
+                        </div>}
+
                     </div>
                 </Layout>
             </Wrapper>
