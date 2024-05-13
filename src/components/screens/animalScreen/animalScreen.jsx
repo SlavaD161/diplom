@@ -124,6 +124,7 @@ const AnimalScreen = () => {
 
                                             <div className="mt-[25px] flex flex-col gap-1">
                                                 <p className="text-[18px] text-[#242424]">Категория: {i.data().category}</p>
+                                                <p className="text-[18px] text-[#242424]">Биом: {i.data().biom}</p>
                                                 <p className="text-[18px] text-[#242424]">Место проживания: {i.data().location}</p>
                                                 <p className="text-[18px] text-[#242424]">Масса: {i.data().mass}</p>
                                                 <p className="text-[18px] text-[#242424]">Размер: {i.data().size}</p>
