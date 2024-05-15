@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom"
-
+const getImagePath = (name) => {
+    return `/images/${name.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+};
 const Category = ({imgUrl, title, category, link, count}) => {
+    
+    
     return (
         <Link to={link}>
 
             <div className="flex flex-col items-center w-fit">
 
-                <img className="bg-[#F5F5F5] hover:scale-105 transition-all duration-300 hover:shadow-2xl rounded-full w-[140px] h-[140px] md:w-[210px] md:h-[210px] object-cover" src={imgUrl} alt={title} />
+                <img className="bg-[#F5F5F5] hover:scale-105 transition-all duration-300 hover:shadow-2xl rounded-full w-[140px] h-[140px] md:w-[210px] md:h-[210px] object-cover" src={getImagePath(title)} alt={title} />
 
                 <div className="relative">
                     <h2 className="max-w-[250px] text-[20px] text-black font-bold mt-[10px]">{title}</h2>
