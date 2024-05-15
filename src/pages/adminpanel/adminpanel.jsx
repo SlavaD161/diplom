@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import {logo} from "../../assets/images"
+import { logo } from "../../assets/images"
 import { Link } from "react-router-dom"
 import { db, app } from '../../firebase/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { getFirestore, collection, doc, setDoc, deleteDoc } from "firebase/firestore"; 
+import { getFirestore, collection, doc, setDoc, deleteDoc } from "firebase/firestore";
 
 const Adminpanel = () => {
 
@@ -12,21 +12,21 @@ const Adminpanel = () => {
     const [animals] = useCollection(
         collection(getFirestore(app), 'animals'),
         {
-            snapshotListenOptions: { includeMetadataChanges: true },    
+            snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
 
     const [categories] = useCollection(
         collection(getFirestore(app), 'categories'),
         {
-            snapshotListenOptions: { includeMetadataChanges: true },    
+            snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
 
     const [users] = useCollection(
         collection(getFirestore(app), 'users'),
         {
-            snapshotListenOptions: { includeMetadataChanges: true },    
+            snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
 
@@ -116,7 +116,7 @@ const Adminpanel = () => {
                 </div>
                 <div className="p-5 bg-[#FAFBFF] w-11/12">
                     {
-                        tab == 1 
+                        tab == 1
                         &&
                         <div className="overflow-x-auto h-screen">
                             <div className="flex justify-between items-center my-3">
@@ -150,7 +150,7 @@ const Adminpanel = () => {
                         </div>
                     }
                     {
-                        tab == 2 
+                        tab == 2
                         &&
                         <div className="overflow-x-auto h-screen">
                             <div className="flex justify-between items-center my-3">
@@ -194,7 +194,7 @@ const Adminpanel = () => {
                         </div>
                     }
                     {
-                        tab == 3 
+                        tab == 3
                         &&
                         <div className="overflow-x-auto h-screen">
                             <div className="flex justify-between items-center my-3">
@@ -238,8 +238,8 @@ const Adminpanel = () => {
                     <h3 className="font-bold text-lg">Добавить категорию.</h3>
                     <div className="w-full flex flex-col gap-2 mt-[15px]">
                         <input onChange={e => setCategoryInp(prev => ({ ...prev, name: e.target.value }))} value={categoryInp.name} type="text" placeholder="Имя" className="input input-bordered" />
-                        <input onChange={e => setCategoryInp(prev => ({...prev, desc: e.target.value}))} value={categoryInp.desc} type="text" placeholder="Описание" className="input input-bordered" />
-                        <input onChange={e => setCategoryInp(prev => ({...prev, imgUrl: e.target.value}))} value={categoryInp.imgUrl} type="text" placeholder="Картинка URL" className="input input-bordered" />
+                        <input onChange={e => setCategoryInp(prev => ({ ...prev, desc: e.target.value }))} value={categoryInp.desc} type="text" placeholder="Описание" className="input input-bordered" />
+                        <input onChange={e => setCategoryInp(prev => ({ ...prev, imgUrl: e.target.value }))} value={categoryInp.imgUrl} type="text" placeholder="Картинка URL" className="input input-bordered" />
 
                         <button onClick={addCategory} className="mt-[10px] btn bg-[#458FF6] hover:bg-[#3166AF] text-[#fff]">Добавить</button>
 
@@ -255,13 +255,18 @@ const Adminpanel = () => {
                     <h3 className="font-bold text-lg">Добавить животное.</h3>
                     <div className="w-full flex flex-col gap-2 mt-[15px]">
                         <input onChange={e => setAnimalsInp(prev => ({ ...prev, name: e.target.value }))} value={animalInp.name} type="text" placeholder="Имя" className="input input-bordered" />
-                        <input onChange={e => setAnimalsInp(prev => ({...prev, desc: e.target.value}))} value={animalInp.desc} type="text" placeholder="Описание" className="input input-bordered" />
-                        <input onChange={e => setAnimalsInp(prev => ({...prev, imgUrl: e.target.value}))} value={animalInp.imgUrl} type="text" placeholder="Картинка URL" className="input input-bordered" />
-                        <input onChange={e => setAnimalsInp(prev => ({...prev, mass: e.target.value}))} value={animalInp.mass} type="text" placeholder="Масса" className="input input-bordered" />
-                        <input onChange={e => setAnimalsInp(prev => ({...prev, size: e.target.value}))} value={animalInp.size} type="text" placeholder="Размер" className="input input-bordered" />
-                        <input onChange={e => setAnimalsInp(prev => ({...prev, speed: e.target.value}))} value={animalInp.speed} type="text" placeholder="Скорость" className="input input-bordered" />
+                        <textarea
+                            onChange={e => setAnimalsInp(prev => ({ ...prev, desc: e.target.value }))}
+                            value={animalInp.desc}
+                            placeholder="Описание"
+                            className="textarea textarea-bordered"
+                        />
+                        <input onChange={e => setAnimalsInp(prev => ({ ...prev, imgUrl: e.target.value }))} value={animalInp.imgUrl} type="text" placeholder="Картинка URL" className="input input-bordered" />
+                        <input onChange={e => setAnimalsInp(prev => ({ ...prev, mass: e.target.value }))} value={animalInp.mass} type="text" placeholder="Масса" className="input input-bordered" />
+                        <input onChange={e => setAnimalsInp(prev => ({ ...prev, size: e.target.value }))} value={animalInp.size} type="text" placeholder="Размер" className="input input-bordered" />
+                        <input onChange={e => setAnimalsInp(prev => ({ ...prev, speed: e.target.value }))} value={animalInp.speed} type="text" placeholder="Скорость" className="input input-bordered" />
 
-                        <select defaultValue={categories?.docs[0]?.data().name} onChange={e => setAnimalsInp(prev => ({...prev, category: e.target.value}))} value={animalInp.category} className="select select-bordered">
+                        <select defaultValue={categories?.docs[0]?.data().name} onChange={e => setAnimalsInp(prev => ({ ...prev, category: e.target.value }))} value={animalInp.category} className="select select-bordered">
                             {
                                 categories?.docs.map(i => (
                                     <option value={i.data().name}>{i.data().name}</option>
@@ -269,9 +274,9 @@ const Adminpanel = () => {
                             }
                         </select>
 
-                        <input onChange={e => setAnimalsInp(prev => ({...prev, location: e.target.value}))} value={animalInp.location} type="text" placeholder={`Континенты (через - ",")`} className="input input-bordered" />
+                        <input onChange={e => setAnimalsInp(prev => ({ ...prev, location: e.target.value }))} value={animalInp.location} type="text" placeholder={`Континенты (через - ",")`} className="input input-bordered" />
 
-                        <input onChange={e => setAnimalsInp(prev => ({...prev, biom: e.target.value}))} value={animalInp.biom} type="text" placeholder="Биом" className="input input-bordered" />
+                        <input onChange={e => setAnimalsInp(prev => ({ ...prev, biom: e.target.value }))} value={animalInp.biom} type="text" placeholder="Биом" className="input input-bordered" />
 
                         <button onClick={addAnimal} className="mt-[10px] btn bg-[#458FF6] hover:bg-[#3166AF] text-[#fff]">Добавить</button>
 
@@ -280,7 +285,7 @@ const Adminpanel = () => {
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>
                 </form>
-            </dialog>     
+            </dialog>
 
         </>
     )
