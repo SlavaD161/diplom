@@ -98,7 +98,7 @@ const HomeScreen = () => {
 
                                     <Category
                                         imgUrl={"https://oboitd.ru/images/goods/big/20200120021434_Raznye_zhivotnye_3-155.jpg"}
-                                        title={"Все категории >"}
+                                        title={"Все категории"}
                                         category={"Посмотреть все категории"}
                                         link={"/categories"}
                                     />
