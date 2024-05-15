@@ -13,6 +13,7 @@ import Button from "../../ui/button/button"
 
 const AnimalScreen = () => {
 
+    
     let params = new URL(document.location).searchParams;
     let URLName = params.get("name");
 
@@ -84,6 +85,12 @@ const AnimalScreen = () => {
 
     }
 
+
+    const getImagePath = (name) => {
+        return `/images/${name.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+    };
+
+
     return (
         <div>
 
@@ -108,7 +115,7 @@ const AnimalScreen = () => {
                                     <div key={i.id} className="flex flex-col md:flex-row justify-start items-start">
 
                                         <div className="w-full md:w-6/12">
-                                            <img className="object-cover w-full max-h-[500px] rounded-3xl" src={i.data().imgUrl} alt={i.data().name} />
+                                            <img className="object-cover w-full max-h-[500px] rounded-3xl" src={getImagePath(i.data().name)} alt={i.data().name} />
                                         </div>
 
                                         <div className="md:ml-[30px] mt-[15px]">
