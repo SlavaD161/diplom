@@ -142,10 +142,13 @@ const AnimalScreen = () => {
                         </div>
                         
                         <div className="mt-[40px]">
+                        <h1 className="text-2xl font-semibold text-black mb-[20px] ">Описание</h1>
                             {
                             animals?.docs.filter(i => i.data().name == URLName).map(i => (
+                                
                                 <div key={i.id} className="flex justify-start items-center">
-                                    <p className="text-[17px] text-[#7E7E7E]">
+
+                                    <p className="text-[17px] text-[#504f4f]">
                                         {i.data().desc}
                                     </p>
 
