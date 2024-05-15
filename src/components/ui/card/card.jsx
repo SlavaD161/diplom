@@ -17,12 +17,20 @@ const Card = ({imgUrl, title, desc, category, ratings }) => {
         
     }, [ratings])
 
+
+    
+    const getImagePath = (name) => {
+        return `/images/${name.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+    };
+
+
+
     return (
         <a href={`/animal?name=${title}`}>
             <div className="w-fit">
 
                 <div className="relative">
-
+                                                                                                                                                     
                     <img className="h-56 object-cover w-[300px] rounded-3xl hover:shadow-2xl opacity-90 hover:opacity-100 transition-all duration-300" src={imgUrl} alt={title} />
 
                     <span className="badge badge-success absolute top-2 right-3 text-white">{category}</span> 
