@@ -142,7 +142,7 @@ const HomeScreen = () => {
 
                         </div>
 
-                        {localStorage.getItem("isLogined") && <div className="mt-[60px]">
+                        {localStorage.getItem("isLogined") && <div className="mt-[80px]">
 
                             <div>
                                 <Title title={"Животные на вашем континенте"} />
@@ -151,7 +151,7 @@ const HomeScreen = () => {
                             <div className="mt-[35px] flex flex-wrap justify-center md:justify-start gap-[20px] items-center gap-y-[40px]">
 
                                 {
-                                    animals?.docs.reverse().filter(item => item.data().location.split(", ").includes(userLocation)).slice(0, 8).map(i => (
+                                    animals?.docs.reverse().filter(item => item.data().location == userLocation).slice(0, 8).map(i => (
                                         <Card
                                             key={i.id}
                                             imgUrl={i.data().imgUrl}
