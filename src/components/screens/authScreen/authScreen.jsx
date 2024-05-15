@@ -92,7 +92,7 @@ const AuthScreen = () => {
 
                 } else {
                     setError(true)
-                    setErrorTxt("Пароль неверная!")
+                    setErrorTxt("Пароль неверный!")
                     setTimeout(() => {
                         setError(false)
                     }, 2500)
