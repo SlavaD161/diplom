@@ -84,13 +84,13 @@ const Adminpanel = () => {
             setCategoryInp({
                 name: "",
                 desc: "",
-                imgUrl: "",
+                
             })
 
             await setDoc(categoryRef, {
                 name: categoryInp.name,
                 desc: categoryInp.desc,
-                imgUrl: categoryInp.imgUrl,
+                
             }, { merge: true });
 
             document.getElementById('categoryModal').close()
@@ -140,7 +140,7 @@ const Adminpanel = () => {
                                                 <th className="w-[65px] hidden xl:block text-center">{index + 1}</th>
                                                 <td className="w-1/12">{item.data().name}</td>
                                                 <td className="w-6/12">{item.data().desc}</td>
-                                                <td className="w-3/12">{item.data().imgUrl.toString().slice(0, 36)}...</td>
+                                                
                                                 <td onClick={() => deleteCategory(item.id)} className="w-1/12 cursor-pointer block hover:scale-105 transition-all text-red-500 text-center">x</td>
                                             </tr>
                                         ))
@@ -179,7 +179,7 @@ const Adminpanel = () => {
                                                 <th className="w-[65px] hidden xl:block text-center">{index + 1}</th>
                                                 <td className="w-2/12">{item.data().name}</td>
                                                 <td className="w-2/12">{item.data().category}</td>
-                                                <td className="w-5/12">{item.data().imgUrl.toString().slice(0, 36)}...</td>
+                                                
                                                 <td className="w-3/12">{item.data().location}</td>
                                                 <td className="w-3/12">{item.data().biom}</td>
                                                 <td className="w-2/12">{item.data().mass}</td>
@@ -239,7 +239,7 @@ const Adminpanel = () => {
                     <div className="w-full flex flex-col gap-2 mt-[15px]">
                         <input onChange={e => setCategoryInp(prev => ({ ...prev, name: e.target.value }))} value={categoryInp.name} type="text" placeholder="Имя" className="input input-bordered" />
                         <input onChange={e => setCategoryInp(prev => ({ ...prev, desc: e.target.value }))} value={categoryInp.desc} type="text" placeholder="Описание" className="input input-bordered" />
-                        <input onChange={e => setCategoryInp(prev => ({ ...prev, imgUrl: e.target.value }))} value={categoryInp.imgUrl} type="text" placeholder="Картинка URL" className="input input-bordered" />
+                        
 
                         <button onClick={addCategory} className="mt-[10px] btn bg-[#458FF6] hover:bg-[#3166AF] text-[#fff]">Добавить</button>
 
@@ -261,7 +261,7 @@ const Adminpanel = () => {
                             placeholder="Описание"
                             className="textarea textarea-bordered"
                         />
-                        <input onChange={e => setAnimalsInp(prev => ({ ...prev, imgUrl: e.target.value }))} value={animalInp.imgUrl} type="text" placeholder="Картинка URL" className="input input-bordered" />
+                        
                         <input onChange={e => setAnimalsInp(prev => ({ ...prev, mass: e.target.value }))} value={animalInp.mass} type="text" placeholder="Масса" className="input input-bordered" />
                         <input onChange={e => setAnimalsInp(prev => ({ ...prev, size: e.target.value }))} value={animalInp.size} type="text" placeholder="Размер" className="input input-bordered" />
                         <input onChange={e => setAnimalsInp(prev => ({ ...prev, speed: e.target.value }))} value={animalInp.speed} type="text" placeholder="Скорость" className="input input-bordered" />
