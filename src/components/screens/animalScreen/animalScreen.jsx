@@ -131,9 +131,33 @@ const AnimalScreen = () => {
                                                 <p className="text-[18px] text-[#242424]">Скорость: {i.data().speed}</p>
                                             </div>
 
-                                            <p className="max-w-[600px] text-[17px] mt-[25px] text-[#7E7E7E]">{i.data().desc}</p>
+                                            
 
-                                            {
+                                            
+                                        </div>
+
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        
+                        <div className="mt-[40px]">
+                            {
+                            animals?.docs.filter(i => i.data().name == URLName).map(i => (
+                                <div key={i.id} className="flex justify-start items-center">
+                                    <p className="text-[17px] text-[#7E7E7E]">
+                                        {i.data().desc}
+                                    </p>
+
+                                    
+                                </div>
+                            ))
+
+                            }
+                            {
+                            animals?.docs.filter(i => i.data().name == URLName).map(i => (
+                                <div key={i.id} className="flex justify-end items-center mt-[20px] ">
+                                    {
                                                 localStorage.getItem("isLogined")
                                                 &&
                                                 <div>
@@ -189,15 +213,18 @@ const AnimalScreen = () => {
                                                 </form>
                                             </dialog>
 
+                                    
+                                </div>
+                            ))
 
-                                        </div>
-
-                                    </div>
-                                ))
                             }
+                            
+                            
+                            
                         </div>
+                        
 
-                        <div className="mt-[80px]">
+                        <div className="mt-[40px]">
                             <Title title={"Другие животные"}/>
                         </div>
 
