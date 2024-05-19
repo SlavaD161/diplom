@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
 import Button from "../../ui/button/button"
 
+const getImagePath = (name) => {
+    return `/images/${name.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+};
+
 const Slider = ({title, desc, link, imgUrl}) => {
     return (
         <div className="bg-[#E5F4ED] flex justify-between flex-col md:flex-row items-start py-[50px] rounded-xl px-[20px] md:px-[100px] gap-[60px]">
@@ -19,7 +23,7 @@ const Slider = ({title, desc, link, imgUrl}) => {
 
             </div>
 
-            <img src={imgUrl} alt={title} className="absolute md:static object-cover h-96 opacity-35 md:opacity-100 right-2 top-20 w-6/12 rounded-[40px] mix-blend-luminosity" />
+            <img src={getImagePath(title)} alt={title} className="absolute md:static object-cover h-96 opacity-35 md:opacity-100 right-2 top-20 w-6/12 rounded-[40px] mix-blend-luminosity" />
             
         </div>
     )
