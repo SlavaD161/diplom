@@ -3,7 +3,7 @@ import { logo } from "../../assets/images"
 import { Link } from "react-router-dom"
 import { db, app } from '../../firebase/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { getFirestore, collection, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, deleteDoc, query, where } from "firebase/firestore";
 
 const Adminpanel = () => {
 
@@ -29,6 +29,23 @@ const Adminpanel = () => {
             snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
+
+    const [comments] = useCollection(
+        collection(getFirestore(app), 'comments'),
+        {
+            snapshotListenOptions: { includeMetadataChanges: true },
+        }
+    );
+
+    const deleteComment = async (commentId) => {
+        try {
+          await deleteDoc(doc(db, "comments", commentId));
+          console.log("Comment deleted successfully!");
+          // Возможно, вам также нужно обновить список комментариев после удаления
+        } catch (error) {
+          console.error("Error deleting comment:", error);
+        }
+      };
 
     const deleteAnimal = async (id) => {
         await deleteDoc(doc(db, "animals", id))
@@ -112,6 +129,7 @@ const Adminpanel = () => {
                         <p onClick={() => setTab(1)} className={`${tab == 1 ? "bg-[#458FF6] text-[#fff] font-medium " : "bg-[#ececec50] text-[#7a7c80] "} text-lg rounded-[8px] hover:cursor-pointer hover:translate-x-1.5 transition-all py-[8px] px-[25px] w-full mr-5`}>Категории</p>
                         <p onClick={() => setTab(2)} className={`${tab == 2 ? "bg-[#458FF6] text-[#fff] font-medium " : "bg-[#ececec50] text-[#7a7c80] "} text-lg rounded-[8px] hover:cursor-pointer hover:translate-x-1.5 transition-all py-[8px] px-[25px] w-full mr-5`}>Животные</p>
                         <p onClick={() => setTab(3)} className={`${tab == 3 ? "bg-[#458FF6] text-[#fff] font-medium " : "bg-[#ececec50] text-[#7a7c80] "} text-lg rounded-[8px] hover:cursor-pointer hover:translate-x-1.5 transition-all py-[8px] px-[25px] w-full mr-5`}>Пользователи</p>
+                        <p onClick={() => setTab(4)} className={`${tab == 4 ? "bg-[#458FF6] text-[#fff] font-medium " : "bg-[#ececec50] text-[#7a7c80] "} text-lg rounded-[8px] hover:cursor-pointer hover:translate-x-1.5 transition-all py-[8px] px-[25px] w-full mr-5`}>Комментарии</p>
                     </div>
                 </div>
                 <div className="p-5 bg-[#FAFBFF] w-11/12">
@@ -228,6 +246,39 @@ const Adminpanel = () => {
                             </table>
                         </div>
                     }
+                    {
+                        tab == 4
+                        &&
+                        <div className="overflow-x-auto h-screen">
+                            <div className="flex justify-between items-center my-3">
+                                <h1 className="text-2xl font-[800] text-[#5c5c5c]">Комментарии</h1>
+                            </div>
+                            <table className="shadow-admin2 table my-20 bg-[#FFFFFF] w-11/12 mx-auto">
+                                <thead className="w-full hidden 2xl:table">
+                                    <tr className="flex justify-between py-2.5">
+                                        <th className="w-[65px] text-center">№</th>
+                                        <th className="w-4/12">Пользователь</th>
+                                        <th className="w-3/12">Текст</th>
+                                        <th className="w-1/12">Удалить</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="rounded-[30px] w-full">
+                                    {
+                                        
+                                        comments?.docs.sort().map((comment, index) => (
+                                            <tr className="bg-[#FFFFFF] hover:bg-[#f1f1f16c] flex-col items-start 2xl:flex-row flex justify-between w-full py-[10px]">
+                                                <th className="w-[65px] hidden xl:block text-center">{index + 1}</th>
+                                                <td className="w-4/12">{comment.data().userId}</td>
+                                                <td className="w-3/12">{comment.data().text}</td>
+                                                <td onClick={() => deleteComment(comment.id)} className="w-1/12 cursor-pointer block hover:scale-105 transition-all text-red-500 text-center">Удалить</td>
+                                            </tr>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    } 
                 </div>
             </div>
             :
