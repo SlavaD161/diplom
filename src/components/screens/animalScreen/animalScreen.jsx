@@ -20,7 +20,7 @@ const AnimalScreen = () => {
     let params = new URL(document.location).searchParams;
     let URLName = params.get("name");
 
-    const [userName, setUserName] = useState(null);
+    
 
     const [animals, loading] = useCollection(
         collection(getFirestore(app), 'animals'),
