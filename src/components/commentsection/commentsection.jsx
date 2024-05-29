@@ -9,10 +9,21 @@ const CommentSection = ({ animalId, userId }) => {
         setCommentsUpdated(!commentsUpdated);
     };
 
+    const handleSubmitComment = () => {
+        // Проверяем, зарегистрирован ли пользователь
+        if (userId) {
+            // Если пользователь зарегистрирован, обрабатываем отправку комментария
+            updateComments(); // Обновляем список комментариев
+        } else {
+            // Если пользователь не зарегистрирован, показываем сообщение об ошибке или перенаправляем на страницу входа
+            alert("Только зарегистрированные пользователи могут оставлять комментарии.");
+        }
+    };
+
     return (
         <div className="comment-section">
             <CommentsList animalId={animalId} commentsUpdated={commentsUpdated} />
-            <AddComment animalId={animalId} userId={userId} updateComments={updateComments} />
+            <AddComment animalId={animalId} userId={userId} handleSubmitComment={handleSubmitComment}/>
         </div>
     );
 };
