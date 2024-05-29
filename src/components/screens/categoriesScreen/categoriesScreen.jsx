@@ -45,7 +45,7 @@ const CategoriesScreen = () => {
                             title={"Все категории"}
                             linkName={"Все категории"}
                         />
-
+                        {localStorage.getItem("isLogined") && (
                         <div className="mt-[80px]">
                             <div className="mt-[35px] flex justify-center md:justify-start flex-wrap items-center gap-[50px]">
 
@@ -66,7 +66,8 @@ const CategoriesScreen = () => {
 
                             </div>
                         </div>
-
+                        )}
+                        
                     </div>
                 </Layout>
             </Wrapper>
