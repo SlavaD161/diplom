@@ -27,6 +27,8 @@
     background: url(../images/background.svg);
 }
 
+
+
 @media screen and (max-width: 800px) {
     .swiper-button-next {
         display: none;
