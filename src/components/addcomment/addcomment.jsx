@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../../firebase/firebase';
+import { db } from '../../firebase/firebase';
+
 
 const AddComment = ({ animalId }) => {
     const [newComment, setNewComment] = useState('');
