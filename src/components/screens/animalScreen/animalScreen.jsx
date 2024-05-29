@@ -240,7 +240,9 @@ const AnimalScreen = () => {
                             
                         </div>
                         <div className="mt-[40px]">
-                            <Title title={"Комментарии"}/>
+                            <div className="mb-[40px]">
+                                <Title title={"Комментарии"}/>
+                            </div>
                             <CommentSection animalId={URLName} userId={localStorage.getItem("user")} />
                         </div>
                         
