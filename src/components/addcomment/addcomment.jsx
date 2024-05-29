@@ -5,6 +5,7 @@ import { db } from '../../firebase/firebase';
 const AddComment = ({ animalId, userId, updateComments }) => {
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState([]);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         // Загружаем комментарии и подписываемся на их обновления
@@ -25,6 +26,12 @@ const AddComment = ({ animalId, userId, updateComments }) => {
     };
 
     const handleAddComment = async () => {
+        if (!userId) {
+            setError("Только зарегистрированные пользователи могут оставлять комментарии.");
+            setTimeout(() => setError(''), 1600); // Скрыть сообщение об ошибке через 3 секунды
+            return; // Прекращаем выполнение функции, если пользователь не зарегистрирован
+        }
+
         if (newComment.trim()) {
             // Если количество комментариев больше 14, удаляем старый комментарий
             if (comments.length >= 12) {
@@ -58,7 +65,17 @@ const AddComment = ({ animalId, userId, updateComments }) => {
                     className="w-full h-[150px] p-4 border border-gray-300 rounded"
                 />
             </div>
-
+            {error && (
+                <dialog id="ratemodal" className="modal" open>
+                    <div className="modal-box">
+                        <h3 className="font-bold text-2xl text-center">Недоступно</h3>
+                        <p className="text-center">Для отправки комментария необходимо зарегистрироваться!</p>
+                    </div>
+                    <form method="dialog" className="modal-backdrop">
+                        <button>Закрыть</button>
+                    </form>
+                </dialog>
+            )}
             <div>
                 <button
                     onClick={handleAddComment}
