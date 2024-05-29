@@ -10,6 +10,7 @@ import Loader from "../../shared/loader/loader"
 import Card from "../../ui/card/card"
 import Title from "../../ui/title/title"
 import Button from "../../ui/button/button"
+import CommentSection from "../../commentsection/commentsection"
 
 const AnimalScreen = () => {
 
@@ -236,6 +237,8 @@ const AnimalScreen = () => {
 
                         <div className="mt-[40px]">
                             <Title title={"Другие животные"}/>
+                            <Title>Комментарии</Title>
+                            <CommentSection namePage={URLName} commentsCollection="commentsAnimals"/>
                         </div>
 
                         <div className="mt-[30px] flex flex-wrap justify-center md:justify-start gap-[20px] items-center gap-y-[40px]">
