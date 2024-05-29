@@ -1,6 +1,7 @@
-import React from 'react';
-import CommentsList from './CommentsList';
-import AddComment from './AddComment';
+
+import CommentsList from "../../commentlist/commentlist"
+import AddComment from "../../addcomment/addcomment"
+
 
 const CommentSection = ({ animalId }) => {
     return (
