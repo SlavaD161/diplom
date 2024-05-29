@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../../../firebase/firebase';
+import { db } from '../../firebase/firebase';
 
 const CommentsList = ({ animalId }) => {
     const [comments, setComments] = useState([]);
