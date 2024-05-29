@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
-const CommentsList = ({ animalId }) => {
+const CommentsList = ({ animalId, commentsUpdated }) => {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const CommentsList = ({ animalId }) => {
         };
 
         fetchComments();
-    }, [animalId]);
+    }, [animalId, commentsUpdated]);
 
     return (
         <div className="comments-list">
