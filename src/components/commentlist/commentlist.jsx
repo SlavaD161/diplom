@@ -10,7 +10,13 @@ const CommentsList = ({ animalId, commentsUpdated }) => {
             const q = query(collection(db, 'comments'), where('animalId', '==', animalId));
             const querySnapshot = await getDocs(q);
             const commentsData = querySnapshot.docs.map(doc => doc.data());
-            setComments(commentsData);
+
+            // Сортировка комментариев по времени создания в убывающем порядке
+            const commentsSortedByTime = commentsData.sort((a, b) => {
+                return new Date(b.timestamp) - new Date(a.timestamp);
+            });
+
+            setComments(commentsSortedByTime);
         };
 
         fetchComments();
