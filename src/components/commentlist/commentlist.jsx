@@ -18,10 +18,9 @@ const CommentsList = ({ animalId }) => {
 
     return (
         <div className="comments-list">
-            
             {comments.map((comment, index) => (
                 <div key={index} className="comment">
-                    <p><strong>{comment.userName}:</strong> {comment.text}</p>
+                    <p><strong>{comment.userId} ({comment.userName}):</strong> {comment.text}</p>
                 </div>
             ))}
         </div>
