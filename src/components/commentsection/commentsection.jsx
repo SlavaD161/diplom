@@ -1,5 +1,5 @@
-import CommentsList from "../../commentlist/commentlist"
-import AddComment from "../../addcomment/addcomment"
+import CommentsList from "../commentlist/commentlist"
+import AddComment from "../addcomment/addcomment"
 
 
 const CommentSection = ({ animalId }) => {
