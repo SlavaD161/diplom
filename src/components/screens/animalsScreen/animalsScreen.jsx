@@ -2,12 +2,14 @@ import Layout from "../../layout/layout"
 import Wrapper from "../../layout/wrapper"
 import Footer from "../../shared/footer/footer"
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { getFirestore, collection } from "firebase/firestore"; 
+import { getFirestore, collection } from "firebase/firestore";
 import { app } from "../../../firebase/firebase"
 import Topbar from "../../ui/topbar/topbar";
 import Card from "../../ui/card/card";
 import { useEffect, useState } from "react";
 import Loader from "../../shared/loader/loader";
+import CommentSection from "../../commentsection/commentsection";
+
 
 const AnimalsScreen = () => {
 
@@ -20,7 +22,7 @@ const AnimalsScreen = () => {
     const [animals, loading] = useCollection(
         collection(getFirestore(app), 'animals'),
         {
-            snapshotListenOptions: { includeMetadataChanges: true },    
+            snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
 
@@ -28,7 +30,7 @@ const AnimalsScreen = () => {
     const [preMass, setPreMass] = useState([])
     const [preSize, setPreSize] = useState([])
     const [preSpeed, setPreSpeed] = useState([])
-    
+
     useEffect(() => {
         window.scroll(0, 0)
         setAnimalsFiltered(animals?.docs.map(i => i))
@@ -49,10 +51,10 @@ const AnimalsScreen = () => {
         } else {
             const set2 = new Set(animals?.docs.map(i => i?.data().mass))
             setPreMass(Array.from(set2))
-    
+
             const set3 = new Set(animals?.docs.map(i => i?.data().size))
             setPreSize(Array.from(set3))
-    
+
             const set4 = new Set(animals?.docs.map(i => i?.data().speed))
             setPreSpeed(Array.from(set4))
         }
@@ -78,17 +80,18 @@ const AnimalsScreen = () => {
 
             {
                 loading &&
-                <Loader/>
+                <Loader />
             }
 
             <Wrapper>
                 <Layout>
                     <div className="mt-[40px]">
-                        
+
                         <Topbar
                             title={URLCategory ? URLCategory : `Все животные ${URLSearch ? "(" + URLSearch + ")" : ""}`}
                             linkName={URLCategory ? URLCategory : `Все животные ${URLSearch ? "(" + URLSearch + ")" : ""}`}
                         />
+                        {localStorage.getItem("isLogined") && (
 
                         <div className="mt-[20px] flex justify-center md:justify-start flex-wrap items-center w-full gap-[10px]">
 
@@ -130,7 +133,7 @@ const AnimalsScreen = () => {
                             </div>
 
                         </div>
-
+                    )}
                         <div className="mt-[60px]">
                             <div className="mt-[35px] flex flex-wrap justify-center md:justify-start gap-[20px] items-center gap-y-[40px]">
 
@@ -182,8 +185,9 @@ const AnimalsScreen = () => {
                     </div>
                 </Layout>
             </Wrapper>
-            {!loading && <Footer/>}
+            {!loading && <Footer />}
         </div>
+        
     )
 }
 
