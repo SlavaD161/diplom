@@ -18,7 +18,7 @@ const CommentsList = ({ animalId }) => {
 
     return (
         <div className="comments-list">
-            <h3>Комментарии</h3>
+            
             {comments.map((comment, index) => (
                 <div key={index} className="comment">
                     <p><strong>{comment.userName}:</strong> {comment.text}</p>
