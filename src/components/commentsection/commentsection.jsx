@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase/firebase';
-import CommentsList from "../commentlist/commentlist"
-import AddComment from "../addcomment/addcomment"
+import React, { useState } from 'react';
+import CommentsList from "../commentlist/commentlist";
+import AddComment from "../addcomment/addcomment";
 
-const CommentSection = ({ animalId, userId }) => { // Добавляем userId
+const CommentSection = ({ animalId, userId }) => {
+    const [commentsUpdated, setCommentsUpdated] = useState(false);
+
+    const updateComments = () => {
+        setCommentsUpdated(!commentsUpdated);
+    };
+
     return (
         <div className="comment-section">
-            <CommentsList animalId={animalId} />
-            <AddComment animalId={animalId} userId={userId} /> {/* Передаем userId */}
+            <CommentsList animalId={animalId} commentsUpdated={commentsUpdated} />
+            <AddComment animalId={animalId} userId={userId} updateComments={updateComments} />
         </div>
     );
 };
