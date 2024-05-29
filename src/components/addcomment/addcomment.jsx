@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
-import Button from "../ui/button/button"
 
-const AddComment = ({ animalId, userId }) => {
+const AddComment = ({ animalId, userId, updateComments }) => {
     const [newComment, setNewComment] = useState('');
 
     const handleAddComment = async () => {
         if (newComment.trim()) {
             await addDoc(collection(db, 'comments'), {
                 animalId: animalId,
-                userId: userId, // Добавляем идентификатор пользователя
+                userId: userId,
                 text: newComment,
                 timestamp: serverTimestamp(),
             });
             setNewComment('');
+            updateComments(); // Обновляем список комментариев после добавления нового комментария
         }
     };
 
     return (
-        <div className="comment-form">
+        <div className="comment-form mt-[40px]">
             <textarea
                 value={newComment}
                 onChange={e => setNewComment(e.target.value)}
                 placeholder="Добавьте комментарий..."
             ></textarea>
-            <Button onClick={handleAddComment}>Отправить</Button>
+            <button onClick={handleAddComment}>Отправить</button>
         </div>
     );
 };
