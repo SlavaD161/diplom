@@ -9,13 +9,14 @@ import Card from "../../ui/card/card";
 import { useEffect, useState } from "react";
 import Loader from "../../shared/loader/loader";
 import CommentSection from "../../commentsection/commentsection";
-
+import { Link } from "react-router-dom";
 
 const AnimalsScreen = () => {
 
     let params = new URL(document.location).searchParams;
     let URLCategory = params.get("category");
     let URLSearch = params.get("search");
+    let URLContinent = params.get("continent");
 
     const [animalsFiltered, setAnimalsFiltered] = useState([])
 
@@ -165,6 +166,17 @@ const AnimalsScreen = () => {
                                                         desc={i.data().desc}
                                                     />
                                                 }
+                                            } else if (URLContinent) {
+                                                if (i.data().location.split(", ").includes(URLContinent)) {
+                                                    return <Card
+                                                        key={i.id}
+                                                        imgUrl={i.data().imgUrl}
+                                                        title={i.data().name}
+                                                        category={i.data().category}
+                                                        ratings={i.data().ratings.split(", ").filter(i => i != "")}
+                                                        desc={i.data().desc}
+                                                    />
+                                                }
                                             } else {
                                                 return <Card
                                                     key={i.id}
@@ -178,17 +190,18 @@ const AnimalsScreen = () => {
                                         }
                                     })
                                 }
-
+    
                             </div>
                         </div>
-
+    
                     </div>
                 </Layout>
             </Wrapper>
             {!loading && <Footer />}
         </div>
-        
+    
     )
-}
-
-export default AnimalsScreen
+    }
+    
+    export default AnimalsScreen;
+      
