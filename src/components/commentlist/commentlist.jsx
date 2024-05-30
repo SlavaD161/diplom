@@ -27,7 +27,7 @@ const CommentsList = ({ animalId, commentsUpdated }) => {
             <div className="space-y-4">
                 {comments.map((comment, index) => (
                     <div key={index} className="comment p-4 bg-gray-100 rounded-lg">
-                        <p className="text-gray-800"><strong>{comment.userId} ({comment.userName}):</strong> {comment.text}</p>
+                        <p className="text-gray-800"><strong>{comment.userId}:</strong> {comment.text}</p>
                     </div>
                 ))}
             </div>
