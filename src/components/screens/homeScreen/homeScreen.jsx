@@ -9,7 +9,7 @@ import Title from "../../ui/title/title"
 import Footer from "../../shared/footer/footer"
 import Category from "../../ui/category/category"
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { getFirestore, collection } from "firebase/firestore"; 
+import { getFirestore, collection } from "firebase/firestore";
 import { app } from "../../../firebase/firebase"
 import { useEffect, useState } from "react"
 import Loader from "../../shared/loader/loader"
@@ -21,21 +21,21 @@ const HomeScreen = () => {
     const [categories, loading] = useCollection(
         collection(getFirestore(app), 'categories'),
         {
-            snapshotListenOptions: { includeMetadataChanges: true },    
+            snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
 
     const [animals, loading2] = useCollection(
         collection(getFirestore(app), 'animals'),
         {
-            snapshotListenOptions: { includeMetadataChanges: true },    
+            snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
 
     const [users] = useCollection(
         collection(getFirestore(app), 'users'),
         {
-            snapshotListenOptions: { includeMetadataChanges: true },    
+            snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
 
@@ -43,7 +43,7 @@ const HomeScreen = () => {
         window.scroll(0, 0)
     }, [])
 
-    useEffect(() => {        
+    useEffect(() => {
         if (localStorage.getItem("isLogined")) {
             setUserLocation(users?.docs.filter(i => i.data().email == localStorage.getItem("user"))[0].data().continent)
         }
@@ -55,22 +55,22 @@ const HomeScreen = () => {
 
             {
                 loading &&
-                <Loader/>
+                <Loader />
             }
 
             {
                 loading2 &&
-                <Loader/>
+                <Loader />
             }
 
             <Wrapper>
                 <Layout>
                     <div className="mt-[20px]">
                         <div className="hidden md:block">
-                            <Navigation/>
+                            <Navigation />
                         </div>
                         <div className="md:mt-[60px]">
-                            <Hero/>
+                            <Hero />
                         </div>
                         <div className="mt-[60px]">
                             <div>
@@ -164,13 +164,20 @@ const HomeScreen = () => {
                                 }
 
                             </div>
+                            <div className="mt-[60px] flex justify-center">
+                                <Link to={`/animals?continent=${userLocation}`}>
+                                    <Button>
+                                        <p>Посмотреть все</p>
+                                    </Button>
+                                </Link>
+                            </div>
 
                         </div>}
 
                     </div>
                 </Layout>
             </Wrapper>
-            {!loading && <Footer/>}
+            {!loading && <Footer />}
         </div>
     )
 }
