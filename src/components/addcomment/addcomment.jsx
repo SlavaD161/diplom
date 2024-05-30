@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { addDoc, collection, query, orderBy, limit, onSnapshot, deleteDoc, doc } from 'firebase/firestore'; // Импортируем функции Firestore
 import { db } from '../../firebase/firebase';
 
-const AddComment = ({ animalId, userId, updateComments }) => {
+const AddComment = ({ animalId, userId, handleSubmitComment }) => {
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState([]);
     const [error, setError] = useState('');
@@ -45,7 +45,7 @@ const AddComment = ({ animalId, userId, updateComments }) => {
                 timestamp: timestamp, // Используем строку в качестве времени комментария
             });
             setNewComment('');
-            updateComments(); // Обновляем список комментариев после добавления нового комментария
+            handleSubmitComment(); // Обновляем список комментариев после добавления нового комментария
         }
     };
 
