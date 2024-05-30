@@ -23,7 +23,7 @@ const CommentSection = ({ animalId, userId }) => {
     return (
         <div className="comment-section">
             <CommentsList animalId={animalId} commentsUpdated={commentsUpdated} />
-            <AddComment animalId={animalId} userId={userId} handleSubmitComment={handleSubmitComment}/>
+            <AddComment animalId={animalId} userId={userId} handleSubmitComment={handleSubmitComment}  />
         </div>
     );
 };
